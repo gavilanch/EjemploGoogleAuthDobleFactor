@@ -1,0 +1,27 @@
+﻿
+@{
+    ViewBag.Title = "Activar Autenticador de Google";
+}
+
+@if (ViewBag.ErrorMessage != null)
+{
+    <div class="alert alert-danger" >@ViewBag.ErrorMessage</div>
+}
+
+<h1>Paso 1: Registra tu dispositivo</h1>
+<h2>Activar Autenticador de Google</h2>
+<h3>Usa la cámara de tu celular</h3>
+<img src="@ViewBag.URLImagenQR" alt="QR" />
+
+<h3>O Utiliza este código</h3>
+@ViewBag.CodigoManual
+
+<h1>Paso 2: Coloca la clave que indica Google Authenticator en estos momentos</h1>
+
+@using (Html.BeginForm("EnableGoogleAuthenticator", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    <span>Clave:</span> <input type="text" id="Clave" name="Clave" />
+    <input type="submit" value="Listo" class="btn btn-success" />
+    @Html.ActionLink("Cancelar", "Index", null, new { @class = "btn btn-danger" });
+}
